@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CA.DAL.Repositories
 {
-    public interface IUserRepository : IDisposable
+    public interface IUserRepository
     {
         List<User> GetUsers();
 

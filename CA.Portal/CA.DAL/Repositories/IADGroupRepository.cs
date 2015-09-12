@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CA.DAL.Repositories
 {
-    public interface IADGroupRepository : IDisposable
+    public interface IADGroupRepository
     {
         List<User> GetUsersInGroup(string groupName);
         
