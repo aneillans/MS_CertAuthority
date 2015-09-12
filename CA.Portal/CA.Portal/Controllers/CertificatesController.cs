@@ -15,9 +15,25 @@ namespace CA.Portal.Controllers
         }
 
         // Request a new certificate
-        public ActionResult RequestNew()
+        public ActionResult RequestNew(Models.RequestCertificateModel model)
         {
-            return View();
+            if (model == null)
+            {
+                model = new Models.RequestCertificateModel();
+            }
+
+            model.RequestedBy = User.Identity.Name;
+
+            if (ModelState.IsValid)
+            {
+
+            }
+            else
+            {
+                // Let it return to the request screen
+            }
+
+            return View(model);
         }
 
         // Monitor certificate expiry

@@ -13,7 +13,7 @@ namespace CA.Portal.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "CA.DAL.ApplicationDbContext";
         }
 

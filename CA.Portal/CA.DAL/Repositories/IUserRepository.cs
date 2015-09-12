@@ -13,5 +13,7 @@ namespace CA.DAL.Repositories
         List<User> GetUsers(string team);
 
         User GetUser(string accountName);
+
+        void UpdateUser(User user);
     }
 }

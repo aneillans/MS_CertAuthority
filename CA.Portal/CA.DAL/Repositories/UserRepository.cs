@@ -28,5 +28,26 @@ namespace CA.DAL.Repositories
             throw new NotImplementedException();
         }
 
+        public void UpdateUser(User user)
+        {
+            User usrRecord;
+            if (user != null)
+            {
+                if (user.ID != 0)
+                {
+                    // Update existing user
+                    usrRecord = DbContext.Users.FirstOrDefault(s => s.ID == user.ID);
+                    usrRecord.DefaultGroup = user.DefaultGroup;
+                    DbContext.SaveChanges();
+                }
+                else
+                {
+                    // Create a new entry
+                    usrRecord = DbContext.Users.Add(user);
+                    DbContext.SaveChanges();
+                }
+            }
+        }
+
     }
 }

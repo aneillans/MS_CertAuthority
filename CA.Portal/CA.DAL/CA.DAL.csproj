@@ -49,9 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADGroup.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="Certificate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CertificateRepository.cs" />
+    <Compile Include="Repositories\ADGroupRepository.cs" />
+    <Compile Include="Repositories\ICertificateRepository.cs" />
+    <Compile Include="Repositories\IADGroupRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="User.cs" />

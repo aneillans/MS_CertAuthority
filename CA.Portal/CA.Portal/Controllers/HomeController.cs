@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CA.Portal.Controllers
 {
@@ -25,11 +26,31 @@ namespace CA.Portal.Controllers
             return View(model);
         }
 
-        public ActionResult NewUser()
+        public ActionResult NewUser(Models.BaseUserModel model)
         {
             ViewBag.Message = "I've not seen you before; please select your default Active Directory Group below, and click Save.";
 
-            return View(new CA.DAL.User());
+            if (model == null)
+            {
+                new Models.BaseUserModel(Roles.GetRolesForUser());
+            }
+            else
+            {
+                DAL.User usr = UserRepository.GetUser(User.Identity.Name);
+                if (usr == null)
+                {
+                    usr = new DAL.User();
+                    usr.Account = User.Identity.Name;
+                }
+                
+                usr.DefaultGroup = model.DefaultRole;
+
+                UserRepository.UpdateUser(usr);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
     }
 }

@@ -14,6 +14,8 @@ namespace CA.DAL
         }
 
         public virtual IDbSet<User> Users { get; set; }
+        public virtual IDbSet<ADGroup> ADGroups { get; set; }
+        public virtual IDbSet<Certificate> Certificates { get; set; }
 
     }
 }
