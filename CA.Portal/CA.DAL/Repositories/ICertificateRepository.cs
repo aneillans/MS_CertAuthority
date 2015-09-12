@@ -9,6 +9,8 @@ namespace CA.DAL.Repositories
     public interface ICertificateRepository
     {
         Certificate Get();
-        
+
+
+        Certificate Update(Certificate certificate);
     }
 }

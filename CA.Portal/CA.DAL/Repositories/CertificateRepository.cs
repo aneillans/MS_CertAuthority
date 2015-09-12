@@ -17,5 +17,31 @@ namespace CA.DAL.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public Certificate Update(Certificate certificate)
+        {
+            Certificate cer = DbContext.Certificates.FirstOrDefault(s=>s.ID == certificate.ID);
+            if (cer == null)
+            {
+                cer = new Certificate();
+                DbContext.Certificates.Add(cer);
+
+            }
+            cer.CertificateName = certificate.CertificateName;
+            cer.CER = certificate.CER;
+            cer.LinkedGroupId = certificate.LinkedGroupId;
+            cer.RequestedByUser = certificate.RequestedByUser;
+            cer.RequestedOn = certificate.RequestedOn;
+            cer.UserFriendlyName = certificate.UserFriendlyName;
+
+            if (cer.LinkedGroupId == 0)
+            {
+                cer.LinkedGroupId = 1; // Default to everyone
+            }
+
+            DbContext.SaveChanges();
+
+            return cer;
+        }
     }
 }

@@ -10,7 +10,10 @@ namespace CA.Portal
         {
 			var container = new UnityContainer();
             container.RegisterType<CA.DAL.Repositories.IUserRepository, CA.DAL.Repositories.UserRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<CA.DAL.Repositories.ICertificateRepository, CA.DAL.Repositories.CertificateRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<CA.DAL.Repositories.IADGroupRepository, CA.DAL.Repositories.ADGroupRepository>(new HierarchicalLifetimeManager());
             container.RegisterType<CA.DAL.ApplicationDbContext>(new HierarchicalLifetimeManager());
+
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
