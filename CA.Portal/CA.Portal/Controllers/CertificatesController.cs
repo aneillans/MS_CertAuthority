@@ -18,7 +18,6 @@ namespace CA.Portal.Controllers
             return View();
         }
 
-        // Request a new certificate
         public ActionResult RequestNew(Models.RequestCertificateModel model)
         {
             if (model == null)
@@ -28,10 +27,37 @@ namespace CA.Portal.Controllers
 
             model.RequestedBy = User.Identity.Name;
 
-            if (ModelState.IsValid)
+            return View(model);
+        }
+
+        // Request (confirm step) a new certificate
+        public ActionResult RequestConfirm(Models.RequestCertificateModel model)
+        {
+            if (model == null)
             {
-                // Process the request
-                CA.Common.CA c = new Common.CA();
+                model = new Models.RequestCertificateModel();
+            }
+
+            model.RequestedBy = User.Identity.Name;
+            CA.Common.CA c = new Common.CA();
+            string dn = string.Empty;
+            int keyLength = 0;
+            string hashAlgo = string.Empty;
+            c.DecodeCSR(model.CSR, out dn, out keyLength, out hashAlgo);
+
+            model.DistingishedName = dn;
+            model.PublicKeyLength = keyLength;
+            model.HashAlgorithm = hashAlgo;
+
+            return View(model);
+        }
+
+        public ActionResult RequestIssue(Models.RequestCertificateModel model)
+        {
+            CA.Common.CA c = new Common.CA();
+
+            // Process the request
+            try {
                 c.Server = Helpers.Configuration.CAServer;
                 string cerResult = c.Request(model.CSR);
 
@@ -43,11 +69,14 @@ namespace CA.Portal.Controllers
                 cer.RequestedByUser = model.RequestedBy;
                 cer.UserFriendlyName = model.FriendlyName;
                 cer.RequestedOn = DateTime.UtcNow;
-                CertificateRepository.Update(cer);
+                cer = CertificateRepository.Update(cer);
+
+                model.Issued = true;
+                model.CertificateId = cer.ID;
             }
-            else
+            catch (Exception ex)
             {
-                // Let it return to the request screen
+                ViewBag.Message = ex.Message;
             }
 
             return View(model);

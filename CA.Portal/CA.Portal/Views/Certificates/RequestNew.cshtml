@@ -5,7 +5,7 @@
 
 <h2>Request a certificate</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("RequestConfirm", "Certificates"))
 {
     @Html.AntiForgeryToken()
 
@@ -15,23 +15,7 @@
         <div class="form-group">
             <label class="control-label col-md-2" for="Account">Requested By</label>
             <div class="col-md-10">
-                <input class="form-control text-box single-line" id="DefaultGroup" name="Account" type="text" value="@Model.RequestedBy" readonly />
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.FriendlyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FriendlyName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FriendlyName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AssignedGroup, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AssignedGroup, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AssignedGroup, "", new { @class = "text-danger" })
+                <input class="form-control text-box single-line" id="RequestedBy" name="RequestedBy" type="text" value="@Model.RequestedBy" readonly />
             </div>
         </div>
 
@@ -46,7 +30,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Request" class="btn btn-default" />
+                <input type="submit" value="Next" class="btn btn-default" />
             </div>
         </div>
     </div>

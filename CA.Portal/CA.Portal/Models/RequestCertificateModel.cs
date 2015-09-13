@@ -10,6 +10,10 @@ namespace CA.Portal.Models
 {
     public class RequestCertificateModel
     {
+        public int PublicKeyLength { get; set; }
+        public string HashAlgorithm { get; set; }
+        public string DistingishedName { get; set; }
+
         [DisplayName("Requested By")]
         public string RequestedBy { get; set; }
 
@@ -23,6 +27,10 @@ namespace CA.Portal.Models
         [Required]
         [DataType(DataType.MultilineText)]
         public string CSR { get; set; }
+
+        public bool Issued { get; set; }
+
+        public int CertificateId { get; set; }
 
     }
 }

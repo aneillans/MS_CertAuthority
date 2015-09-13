@@ -1,0 +1,17 @@
+﻿@model CA.Portal.Models.RequestCertificateModel
+@{
+    ViewBag.Title = "Request Certificate";
+}
+
+<h2>Request a certificate</h2>
+
+@if (Model.Issued)
+{
+    <h4>Certificate Issued</h4>
+}
+else
+{
+    <h4>Certificate NOT Issued</h4>
+    <p>@ViewBag.Message</p>
+}
+

@@ -1,0 +1,73 @@
+﻿@model CA.Portal.Models.RequestCertificateModel
+@{
+    ViewBag.Title = "Request Certificate";
+}
+
+<h2>Request a certificate</h2>
+
+@using (Html.BeginForm("RequestIssue", "Certificates"))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.HashAlgorithm, Model.HashAlgorithm)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Account">Requested By</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" type="text" value="@Model.RequestedBy" readonly />
+                @Html.HiddenFor(model=>model.RequestedBy, Model.RequestedBy)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Account">Certificate Name</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" type="text" value="@Model.DistingishedName" readonly />
+                @Html.HiddenFor(model => model.DistingishedName, Model.DistingishedName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Account">Key Length</label>
+            <div class="col-md-10">
+                <input class="form-control text-box single-line" type="text" value="@Model.PublicKeyLength" readonly />
+                @Html.HiddenFor(model => model.PublicKeyLength, Model.PublicKeyLength)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FriendlyName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FriendlyName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FriendlyName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AssignedGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AssignedGroup, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AssignedGroup, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Account">CSR</label>
+            <div class="col-md-10">
+                <textarea class="form-control text-box multi-line" id="CSR" name="CSR" type="text" readonly >@Model.CSR</textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Request" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+

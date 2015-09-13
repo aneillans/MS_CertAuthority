@@ -197,8 +197,10 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Certificates\RequestNew.cshtml" />
+    <Content Include="Views\Certificates\RequestConfirm.cshtml" />
     <Content Include="Views\Home\NewUser.cshtml" />
+    <Content Include="Views\Certificates\RequestNew.cshtml" />
+    <Content Include="Views\Certificates\RequestIssue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

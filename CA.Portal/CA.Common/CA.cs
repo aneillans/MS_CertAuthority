@@ -1,4 +1,5 @@
 ﻿using CERTCLILib;
+using CERTENROLLLib;
 using System;
 
 namespace CA.Common
@@ -55,6 +56,17 @@ namespace CA.Common
             }
 
             throw new Exceptions.CANotIssuedException(requestResult);
+        }
+
+        public void DecodeCSR(string csr, out string distinguishedName, out int publicKeyLength, out string hashAlgo)
+        {
+            CX509CertificateRequestPkcs10 request = new CX509CertificateRequestPkcs10();
+            request.InitializeDecode(csr, EncodingType.XCN_CRYPT_STRING_BASE64_ANY);
+            request.CheckSignature();
+
+            distinguishedName = ((CX500DistinguishedName)request.Subject).Name;
+            publicKeyLength = request.PublicKey.Length;
+            hashAlgo = request.HashAlgorithm.FriendlyName;
         }
 
         public void Retrieve(string commonName)
