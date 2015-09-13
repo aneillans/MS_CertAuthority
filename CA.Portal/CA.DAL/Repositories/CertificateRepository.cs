@@ -27,7 +27,9 @@ namespace CA.DAL.Repositories
                 DbContext.Certificates.Add(cer);
 
             }
-            cer.CertificateName = certificate.CertificateName;
+            cer.DistingishedName = certificate.DistingishedName;
+            cer.HashAlgorithm = certificate.HashAlgorithm;
+            cer.PublicKeyLength = certificate.PublicKeyLength;
             cer.CER = certificate.CER;
             cer.LinkedGroupId = certificate.LinkedGroupId;
             cer.RequestedByUser = certificate.RequestedByUser;

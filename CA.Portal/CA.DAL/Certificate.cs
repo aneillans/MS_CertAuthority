@@ -22,8 +22,10 @@ namespace CA.DAL
 
         public string UserFriendlyName { get; set; }
 
-        public string CertificateName { get; set; }
-
         public string CER { get; set; }
+
+        public string DistingishedName { get; set; }
+        public string HashAlgorithm { get; set; }
+        public int PublicKeyLength { get; set; }
     }
 }

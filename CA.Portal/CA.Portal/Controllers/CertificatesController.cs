@@ -64,11 +64,13 @@ namespace CA.Portal.Controllers
                 // Log certificate
                 DAL.Certificate cer = new DAL.Certificate();
                 cer.CER = cerResult;
-                cer.CertificateName = string.Empty;
                 //cer.LinkedGroupId = model.AssignedGroup;
                 cer.RequestedByUser = model.RequestedBy;
                 cer.UserFriendlyName = model.FriendlyName;
                 cer.RequestedOn = DateTime.UtcNow;
+                cer.PublicKeyLength = model.PublicKeyLength;
+                cer.HashAlgorithm = model.HashAlgorithm;
+                cer.DistingishedName = model.DistingishedName;
                 cer = CertificateRepository.Update(cer);
 
                 model.Issued = true;
